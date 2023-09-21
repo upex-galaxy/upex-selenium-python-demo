@@ -64,7 +64,7 @@ def get(web):
 
 # * ---- Fixture para usar como BeforeEach y AfterEach: abre y cierra el navegador ----
 @pytest.fixture
-def setup(setWebDriver: WebDriver):
+def beforeEach(setWebDriver: WebDriver):
     if not isinstance(setWebDriver, WebDriver):
         raise ValueError(f'WebDriver was not instanced')
 
@@ -74,11 +74,11 @@ def setup(setWebDriver: WebDriver):
     # la forma más prolija que te puedo enseñar!
     # todo: Se obtiene la URL de Google y se verifica el título
     web.implicitly_wait(10)
-    get.page("https://google.com")
+    get.page("https://www.saucedemo.com/")
 
     # todo:  Se verifica el título de la página
     title = web.title
-    assert title == "Google"
+    assert title == "Swag Labs"
 
     # * Fin de la Precondición.
     # todo: Aquí puedes colocar el código que quieres retornar del setup.

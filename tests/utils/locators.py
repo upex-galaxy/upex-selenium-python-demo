@@ -12,6 +12,14 @@ class Locators:
         self.web.maximize_window()
         self.web.get(link)
 
+    def byDataTest(self, data_test: str):
+        # Buscar elemento por data-test id
+        return self.web.find_element(By.CSS_SELECTOR, f"[data-test={data_test}]")
+
+    def byDataTests(self, data_test: str):
+        # Buscar elemento por data-test ids
+        return self.web.find_elements(By.CSS_SELECTOR, f"[data-test={data_test}]")
+
     def bySelector(self, element: str):
         # Buscar elemento por selector CSS
         return self.web.find_element(By.CSS_SELECTOR, element)
