@@ -3,7 +3,9 @@ import pytest
 # * Primero, se importa siempre "pytest" librería de Python para realizar pruebas (the best!)
 # * A continuación, verás que los imports de nuestros archivos deben comenzar siempre desde el root directory "tests"
 # * En el archivo testbase en especial, se alojan todos  los TestUtils para nuestras pruebas.
-from tests.testbase import Locators, WebDriver, Drivers
+from selenium.webdriver.remote.webdriver import WebDriver
+from tests.utils.drivers import Drivers
+from tests.utils.locators import Locators
 
 
 def pytest_addoption(parser: pytest.Parser):
@@ -27,64 +29,62 @@ BROWSER_FUNCTIONS = {
 
 
 @pytest.fixture
-def setWebDriver(browser):
-    if not isinstance(browser, str):
-        raise ValueError(f'Invalid CLI parameter')
+def setWebDriver(browser: str):
     # * Crear la instancia del Driver (dado el driver elegido por CLI):
     driver = BROWSER_FUNCTIONS.get(browser)
     if not driver:
         raise ValueError(f'Browser "{browser}" not supported.')
 
     runDriver: WebDriver = driver()
-    if not isinstance(runDriver, WebDriver):
-        raise ValueError(f'WebDriver was not instanced')
-
     return runDriver
 
 
 @pytest.fixture
-def web(setWebDriver):
-    if not isinstance(setWebDriver, WebDriver):
-        raise ValueError(f'WebDriver was not instanced')
-
+def web(setWebDriver: WebDriver):
+    # * Obtener solamente la instancia del WebDriver
     return setWebDriver
 
 
 @pytest.fixture
-def get(web):
-    if not isinstance(web, WebDriver):
-        raise ValueError(f'WebDriver was not instanced')
+def get(web: WebDriver):
     # * Crear nueva instancia de las utilidades de prueba (test utils):
     get = Locators(web)
-    if not isinstance(get, Locators):
-        raise ValueError(f'Locators Class was not instanced')
 
     return get
 
 
 # * ---- Fixture para usar como BeforeEach y AfterEach: abre y cierra el navegador ----
 @pytest.fixture
-def beforeEach(setWebDriver: WebDriver):
-    if not isinstance(setWebDriver, WebDriver):
-        raise ValueError(f'WebDriver was not instanced')
-
+def setup(setWebDriver: WebDriver):
     web = setWebDriver
     get = Locators(web)
     # * ESTA ES UNA FORMA INTELIGENTE DE MANEJAR TUS PRUEBAS!
     # la forma más prolija que te puedo enseñar!
     # todo: Se obtiene la URL de Google y se verifica el título
     web.implicitly_wait(10)
-    get.page("https://www.saucedemo.com/")
+    get.page("https://google.com")
 
     # todo:  Se verifica el título de la página
     title = web.title
-    assert title == "Swag Labs"
+    assert title == "Google"
 
     # * Fin de la Precondición.
     # todo: Aquí puedes colocar el código que quieres retornar del setup.
     yield (web, get)
     # todo Código de la PostCondición.
     web.quit()  # Se cierra el navegador
+
+
+@pytest.fixture
+def beforeEach(setWebDriver: WebDriver):
+    web = setWebDriver
+    get = Locators(web)
+    web.implicitly_wait(10)
+    get.page("https://www.saucedemo.com/")
+    title = web.title
+    assert title == "Swag Labs"
+    yield (web, get)
+    web.quit()
 
 
 if __name__ == "__main__":

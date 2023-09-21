@@ -11,18 +11,18 @@ from tests.utils.drivers import *
 
 
 @given('we have behave installed')
-def step_impl(context):
+def step_implA(context):
     # Implementación del paso dado (given), el parámetro context es necesario.
     pass
 
 
 @when('we implement a test')
-def step_impl(context):
+def step_implB(context):
     # Implementación del paso cuando (when)
     assert True is not False
 
 
 @then('behave will test it for us!')
-def step_impl(context):
+def step_implC(context):
     # Implementación del paso entonces (then)
     assert context.failed is False

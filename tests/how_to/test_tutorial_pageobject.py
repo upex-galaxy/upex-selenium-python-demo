@@ -26,9 +26,7 @@ class TestLoginSauce:
         yield validUsername, validPassword
         web.quit()
 
-    def test_login_success(self, givenUserCredentials):
-        if not isinstance(givenUserCredentials, tuple[str, str]):
-            raise ValueError()
+    def test_login_success(self, givenUserCredentials: tuple[str, str]):
         validUsername, validPassword = givenUserCredentials
         loginPage.enterUsername(username=validUsername)
         loginPage.enterPassword(password=validPassword)

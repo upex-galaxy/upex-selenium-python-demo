@@ -74,5 +74,5 @@
 	"python.testing.unittestEnabled": false,
 	"python.testing.pytestEnabled": true,
 	"python.testing.pytestArgs": ["."],
-	"python.analysis.typeCheckingMode": "off"
+	"python.analysis.typeCheckingMode": "basic"
 }
