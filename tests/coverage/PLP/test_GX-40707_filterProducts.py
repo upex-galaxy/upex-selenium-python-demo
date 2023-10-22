@@ -1,13 +1,15 @@
 import pytest
 from tests.testbase import *
+from tests.pages.GX_40707_PLPPage import SwagLabPLP
 from tests.pages.GX_40707_LoginPage import LoginPage
 
 
 def initialSetup():
-    global get, web, loginPage
+    global get, web, loginPage, swgPLPPage
     web = Drivers().chromeDriver()
     get = Locators(web)
     loginPage = LoginPage(web, get)
+    swgPLPPage = SwagLabPLP(web, get)
 
 
 def loginPrecondition():
@@ -16,6 +18,7 @@ def loginPrecondition():
     loginPage.clickButtonSubmit()
     Url = web.current_url
     assert '/inventory' in Url
+    currentVal = swgPLPPage.getDefaultFilterProducts()
 
 
 @pytest.fixture
