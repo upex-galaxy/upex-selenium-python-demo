@@ -25,4 +25,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run pytest
-        run: pytest tests/coverage/shopping_cart/test_GX-37094_removeProducts.py
+        run: pytest tests/coverage/PLP/test_GX-40707_filterProducts.py
