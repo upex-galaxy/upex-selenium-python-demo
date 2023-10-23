@@ -23,9 +23,9 @@ class SwagLabPLP:
             items.append([itemName, itemPrice])
         return items
 
-    def sortedProducts(self, listToSort, targetValue):
+    def sortedProducts(self, listToSort, targetValue, reverseOption):
         itemNameSorted = sorted(
-            listToSort, key=lambda x: x[targetValue], reverse=True)
+            listToSort, key=lambda x: x[targetValue], reverse=reverseOption)
         return itemNameSorted
 
     def filterProduct(self, targetFilterOption):

@@ -29,8 +29,19 @@ def beforeEach():
 def test_TC01_filter_Name_products_Descendent(beforeEach):
     currentVal = swgPLPPage.getCurrentFilterProducts()
     sortedNamesDesc = swgPLPPage.sortedProducts(
-        listToSort=currentVal, targetValue=0)
+        listToSort=currentVal, targetValue=0, reverseOption=True)
     for itemDefault, itemDesc in zip(currentVal, sortedNamesDesc):
         itemNameDefault = itemDefault[0]
         itemNameDesc = itemDesc[0]
         assert itemNameDefault != itemNameDesc
+
+
+def test_TC02_filter_Name_products_Ascendent(beforeEach):
+    swgPLPPage.filterProduct(targetFilterOption=1)
+    currentVal = swgPLPPage.getCurrentFilterProducts()
+    sortedNamesAsc = swgPLPPage.sortedProducts(
+        listToSort=currentVal, targetValue=0, reverseOption=False)
+    for itemDefault, itemAsc in zip(currentVal, sortedNamesAsc):
+        itemNameDefault = itemDefault[0]
+        itemNameAsc = itemAsc[0]
+        assert itemNameDefault != itemNameAsc
