@@ -19,8 +19,8 @@ class SwagLabPLP:
         items = []
         for index in range(len(self.listItemsPLP())):
             itemName = self.itemNameList()[index].text
-            itemPrice = self.itemPriceList()[index].text
-            items.append([itemName, itemPrice])
+            itemPrice = self.itemPriceList()[index].text.replace('$', '')
+            items.append([itemName, float(itemPrice)])
         return items
 
     def sortedProducts(self, listToSort, targetValue, reverseOption):
