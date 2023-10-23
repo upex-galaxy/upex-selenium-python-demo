@@ -57,3 +57,15 @@ def test_TC03_filter_price_products_Ascendent(beforeEach):
         itemPriceDefault = itemDefault[1]
         itemPriceAsc = itemAsc[1]
         expect(itemPriceDefault).toBeEqual(itemPriceAsc)
+
+
+def test_TC04_filter_price_products_Descendent(beforeEach):
+    swgPLPPage.filterProduct(targetFilterOption=2)
+    currentVal = swgPLPPage.getCurrentFilterProducts()
+    sortedPricesDesc = swgPLPPage.sortedProducts(
+        listToSort=currentVal, targetValue=1, reverseOption=True)
+    sortedPricesDesc = sortedPricesDesc[::-1]
+    for itemDefault, itemDesc in zip(currentVal, sortedPricesDesc):
+        itemPriceDefault = itemDefault[1]
+        itemPriceDesc = itemDesc[1]
+        expect(itemPriceDefault).toBeEqual(itemPriceDesc)
