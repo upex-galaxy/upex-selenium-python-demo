@@ -18,7 +18,6 @@ def loginPrecondition():
     loginPage.clickButtonSubmit()
     Url = web.current_url
     assert '/inventory' in Url
-    currentVal = swgPLPPage.getDefaultFilterProducts()
 
 
 @pytest.fixture
@@ -27,5 +26,11 @@ def beforeEach():
     loginPrecondition()
 
 
-def test_TC01(beforeEach):
-    pass
+def test_TC01_filter_Name_products_Descendent(beforeEach):
+    currentVal = swgPLPPage.getCurrentFilterProducts()
+    sortedNamesDesc = swgPLPPage.sortedProducts(
+        listToSort=currentVal, targetValue=0)
+    for itemDefault, itemDesc in zip(currentVal, sortedNamesDesc):
+        itemNameDefault = itemDefault[0]
+        itemNameDesc = itemDesc[0]
+        assert itemNameDefault != itemNameDesc

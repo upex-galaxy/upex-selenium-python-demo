@@ -1,4 +1,5 @@
 from tests.testbase import *
+from selenium.webdriver.support.select import Select
 
 
 class SwagLabPLP:
@@ -14,10 +15,19 @@ class SwagLabPLP:
         self.itemPriceList = lambda: self.get.bySelectors(
             '[class="inventory_item_price"]')
 
-    def getDefaultFilterProducts(self):
+    def getCurrentFilterProducts(self):
         items = []
         for index in range(len(self.listItemsPLP())):
             itemName = self.itemNameList()[index].text
             itemPrice = self.itemPriceList()[index].text
             items.append([itemName, itemPrice])
         return items
+
+    def sortedProducts(self, listToSort, targetValue):
+        itemNameSorted = sorted(
+            listToSort, key=lambda x: x[targetValue], reverse=True)
+        return itemNameSorted
+
+    def filterProduct(self, targetFilterOption):
+        dropdown = Select(self.dropdownFilterProducts())
+        dropdown.select_by_index(targetFilterOption)
