@@ -1,5 +1,6 @@
 import pytest
-from tests.drivers.chromedriver import *
+from tests.testbase import *
+
 
 # * EJEMPLO CON PAGE OBJECT MODEL con todo! Aquí primero hay que importar el módulo POM que se desea usar (o también los necesarios)
 from tests.how_to.pages.examplePageObjectModel import ExampleLoginPage
@@ -8,13 +9,13 @@ from tests.how_to.pages.examplePageObjectModel import ExampleLoginPage
 class TestLoginSauce:
 
     @pytest.fixture
-    def precondition(self):
+    def precondition(self, setWebDriver: WebDriver):
         # Se listan las variables globales del Suite de Prueba.
-        global web, element, loginPage
-        web = chromeDriver()
-        element = Locators(web)
-        loginPage = ExampleLoginPage(web, element)
-        element.goto('https://www.saucedemo.com/')
+        global web, get, loginPage
+        web = setWebDriver
+        get = Locators(web)
+        loginPage = ExampleLoginPage(web, get)
+        get.page('https://www.saucedemo.com/')
 
     # * Si se necesita precondiciones específicas, se puede agregar más Fixtures luego de correr las otras:
     @pytest.fixture
@@ -25,7 +26,7 @@ class TestLoginSauce:
         yield validUsername, validPassword
         web.quit()
 
-    def test_login_success(self, givenUserCredentials):
+    def test_login_success(self, givenUserCredentials: tuple[str, str]):
         validUsername, validPassword = givenUserCredentials
         loginPage.enterUsername(username=validUsername)
         loginPage.enterPassword(password=validPassword)

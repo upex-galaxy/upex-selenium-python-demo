@@ -1,11 +1,23 @@
 {
-	"window.zoomLevel": 2,
 	"workbench.colorTheme": "Winter is Coming (Dark Blue)",
 	"cSpell.language": "en,es",
 	"terminal.integrated.defaultProfile.windows": "Git Bash",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[python]": {
 		"editor.defaultFormatter": "ms-python.autopep8"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"editor.suggest.insertMode": "replace"
+	},
+	"[yaml]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"editor.autoIndent": "advanced",
+		"diffEditor.ignoreTrimWhitespace": false
 	},
 	"editor.formatOnType": true,
 	"editor.formatOnPaste": true,
@@ -75,5 +87,5 @@
 	"python.testing.unittestEnabled": false,
 	"python.testing.pytestEnabled": true,
 	"python.testing.pytestArgs": ["."],
-	"python.analysis.typeCheckingMode": "off"
+	"python.analysis.typeCheckingMode": "basic"
 }
