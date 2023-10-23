@@ -1,13 +1,14 @@
-name: 🤖CI run Regression in QA🧪
-run-name: ${{github.actor}}👨🏻‍🔬 run Regression in ${{github.ref_name}}
+name: 🤖CI run SanityTest Execution🧪
+run-name: ${{github.actor}}👨🏻‍🔬 ran SanityTest in ${{github.ref_name}}
 
 on:
   push:
-    branches:
+    branches-ignore:
       - QA
+      - main
 
 jobs:
-  RegressionTest:
+  SanityTest:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,5 +25,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 🧪Selenium Run Pytest REGRESSION
-        run: pytest --headless=true
+      - name: 🧪Selenium Run Pytest
+        run: pytest --headless=true tests/coverage/example/test_example.py

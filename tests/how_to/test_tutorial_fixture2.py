@@ -6,9 +6,9 @@ class TestSuite:
     # * Este es otro ejemplo de Suite usando otro Fixture y con más de un caso de Prueba:
 
     @pytest.fixture
-    def precondition(self):
+    def precondition(self, setWebDriver: WebDriver):
         global web, get
-        web = Drivers().chromeDriver()
+        web = setWebDriver
         get = Locators(web)
 
         get.page("https://www.selenium.dev/selenium/web/web-form.html")

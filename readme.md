@@ -17,10 +17,10 @@
     <img src="https://user-images.githubusercontent.com/91127281/200486232-5697197c-0541-4496-a487-bc720f234a1b.png" alt="Logo" width="" height="270">
   </a>
 
-<h2 align="center">🧪SELPEX🧪</h2>
+<h2 align="center">🧪SELENIUM-PYTHON🧪</h2>
 
   <p align="center">
-    Selenium + Python + Behave (Gherkin) in VSCode
+    Selenium + Pytest + Behave (Gherkin) in VSCode
     <br />
     <a href="https://github.com/upex-galaxy/selenium-python"><strong>Explore the docs »</strong></a>
     <br />
@@ -33,26 +33,9 @@
 
 # Pruebas Automatizadas con Python🐍
 
-¡Python es un lenguaje de programación que no necesita presentación! Es uno de los lenguajes preferidos cuando se trata de proyectos que involucran aprendizaje automático (ML) , inteligencia artificial (IA) y más.En un campo de batalla diferente, la combinación de Selenium Python es ampliamente preferida en lo que respecta a la automatización de sitios web.
+¡Python es un lenguaje de programación que no necesita presentación! Es uno de los lenguajes preferidos cuando se trata de proyectos que involucran aprendizaje automático (ML) , inteligencia artificial (IA) y más. En un campo de batalla diferente, la combinación de Selenium Python es ampliamente preferida en lo que respecta a la automatización de sitios web.
 
 Según la Encuesta de desarrolladores de Stack Overflow 2021, Python es el tercer lenguaje más popular después de JavaScript y HTML/CSS. La destreza de Selenium y Python ayuda a automatizar las interacciones con WebElements en el DOM (Document Object Model).
-
-# TUTORIAL COMPLETO PASO A PASO CREACIÓN DE PROYECTO (Instalación con Anaconda🐍 + Diseño y Ejecución de Pruebas)
-
-[CURSO: "Selenium AL GRANO" (Python+BDD)](https://upexgalaxy6.atlassian.net/wiki/spaces/UG/pages/917969)
-
-- Precondiciones del Proceso
-- GETTING STARTED
-- CONFIGURACIÓN Y ESTRUCTURA del Working Tree
-- HACER EL PRIMER SCRIPT DE PRUEBA DE SELENIUM
-- Precondiciones para escribir los Test Suites
-- NOMENCLATURA DEL ARCHIVO DE PRUEBA para usar Pytest
-- IMPORTAR las dependencias: Selenium + WebDriver
-- ESTRUCTURA DE SCRIPT DE PRUEBA (TEST SUITE)
-- SCRIPT DE PRUEBA
-- GUÍA PARA USAR LOS WEB ELEMENTS
-- CORRER EL SCRIPT DE PRUEBA EN VSCODE
-- Cómo Configurar el Test Runner para el proyecto Selenium-Python
 
 # CÓMO EMPEZAR DIRECTO AL GRANO:
 
@@ -104,12 +87,136 @@ Según la Encuesta de desarrolladores de Stack Overflow 2021, Python es el terce
    - Seleccionar la ruta python que el ENV activado para el proyecto.
    - Refrescar VSCODE para efectuar todas las configuraciones.
 
-6. **Instala todas las dependencias del archivo requirements.txt en el ENV creado de Conda (el equivalente a package.json en Node.js), ejecutando este comando en especial con la ruta de los envs de Conda para usar el intérprete de python del env creado**:
+6. **Instala todas las dependencias del archivo requirements.txt con el ENV creado de Conda, ejecutando el siguiente comando luego haber activado el ambiente conda y el intérprete de Python**:
    ```
-   C:/Users/<Usuario>/anaconda3/envs/<env_name>/python.exe -m pip install -r requirements.txt
+   pip install -r requirements.txt
    ```
-   - Aquí se está usando el env creado para llegar a su intérprete python que con el mismo pip se instala las dependencias del proyecto actual ubicado. Esto instalará todas las dependencias del Proyecto en el ENV creado para comenzar a trabajar directo.
+   - Aquí se está usando con el mismo pip se instala las dependencias del proyecto actual ubicado. Esto instalará todas las dependencias del Proyecto en el ENV creado para comenzar a trabajar directo.
    - Si estás usando la Opción VSCODE, el cual usa una ruta directa, debes usar esta misma ruta y adentrarte en el archivo python.exe para ejecutar el mismo comando.
+
+# PLAN DE PRUEBA: ESTRATEGIA Y DISEÑO
+
+### 🚩NORMATIVAS A SEGUIR:
+
+1. Perfecta Nomenclatura del nombre de Archivo de prueba: <br> `test_{GXID}_{StoryShortName}.py ej: test_GX50_AgregarItemsAlCart.py`
+2. El Archivo de Prueba dentro estar en el directorio "coverage" con la carpeta del Componente correspondiente, ejemplo: <br> `tests/coverage/example/test_example.py`.
+3. Buen diseño del Test Suite elaborado (Esto implica que se vean bien el código en general, que al menos funcione).
+4. NO usar fixture como PageObjectModel sino como Data (es decir, no agarrar elementos Web por fixtures, sino usar el Fixture para iterar Data o reutilizar variables).
+   - Previamente en GX, se usaba el patrón Fixture como POM, porque era fácil de aprender, pero hoy en día las entrevistas técnicas piden PageObject Model de la manera tradicional, sin usar Commands.
+5. Los "Cypress Commands" no es un uso obligatorio; pero si se quiere usar, debería aplicarse para hacer funciones de algoritmos para múltiples suites o para generar precondiciones repetitivas (Background).
+
+6. **En caso de usar el Utils u otros módulos**: Ya los tienes todo disponible en el archivo principal Testbase que puedes importar desde tu archivo, usando: <br> `from tests.testbase import *`.
+7. **En caso de usar PageObjectModel**: Aplicar las buenas prácticas del patrón de diseño POM. Recuerda usar el tipo de función lambda para generar los locators y crear buenos nombres de los métodos.
+8. **En caso de usar el CI Pipeline**: Usar únicamente el archivo predeterminado del proyecto `sanity.yml`, y asegurarse de modificarlo correctamente (Solo cambiar el Path del Test Suite) y no borrar o cambiar nada más, que funcione y pase los Checks. El archivo `regression.yml` se ejecutará automaticamente cuando los cambios hayan mergeado a QA.
+9. **En caso de usar Behave (BDD)**: Chequear que el archivo Gherkin (.feature) y los StepDefinitions (.py) estén correctamente diseñados. Lee las guías o el curso para más información de su uso.
+
+---
+
+# 🚩NIVELES DE TESTER QA en UPEX Galaxy:
+
+El programa **UPEX Galaxy** está diseñado para guiar a los Testers a través de 2 Etapas (Career Paths). Cada Etapa conlleva ciertos **NIVELES** que el Tester debe alcanzar para llegar a su mayor **SENIORITY**:
+
+## QA Engineer (Pruebas Manuales)
+
+Capacidad de realizar análisis, planificación, ejecución y gestión de:
+
+- Pruebas Manuales de UI
+- Bases de Datos
+- API Testing
+
+### 🧪L1
+
+Capaz de realizar tareas (US) sencillas de frontend sin mucha complejidad.
+
+##### Prácticas:
+
+- Entiende y puede seguir guías y protocolos de prueba previamente definidos.
+- Identifica errores obvios en la interfaz y reporta con claridad.
+- Familiarizado con herramientas básicas de testing y reporting.
+- Capaz de realizar pruebas de regresión siguiendo casos de prueba definidos.
+
+### 🧪L2
+
+Capaz de realizar tareas (US) avanzadas de frontend y también tareas de Backend (Pruebas de Bases de Datos y Pruebas de API).
+
+##### Prácticas:
+
+- Realiza pruebas exploratorias identificando puntos críticos en las aplicaciones.
+- Puede diseñar casos de prueba simples basados en requisitos.
+- Familiarizado con SQL básico para realizar pruebas en Bases de Datos.
+- Inicia pruebas básicas en APIs usando herramientas como Postman o similares.
+- Entiende la importancia de ciclos de vida de defectos y los gestiona correctamente.
+
+### 🧪L3
+
+Capaz de realizar tareas (US) de performance y/o diseñar nuevas Historias de Usuario.
+
+##### Prácticas:
+
+- Diseña y ajusta casos de prueba complejos basados en cambios de requisitos.
+- Identifica y reporta problemas de rendimiento usando herramientas básicas.
+- Realiza pruebas exploratorias avanzadas e identifica áreas no cubiertas.
+- Gestiona los Planes de Prueba (Cobertura, Regresión, Sanity, Smoke) de manera efectiva.
+- Ofrece guía y mentoría a testers de niveles inferiores (Capacidad de ser Tutor).
+- Tiene una comprensión básica sobre automatización de pruebas.
+
+## QA Automation Engineer (Pruebas Automatizadas)
+
+Capacidad de realizar análisis, planificación, ejecución y gestión de:
+
+- Pruebas Automatizadas de E2E
+- Integration Testing (Aplicando para cualquiera de los Frameworks de automatización de Browsers/Apps)
+
+### 🧪L3
+
+Capaz de realizar tareas (TechDept) para Automatizar pruebas UI de historias implementadas.
+
+##### Prácticas:
+
+- Capaz de manejar el flujo completo de trabajo ordinario.
+- Capaz de realizar pruebas Frontend con data sin iteración (hardcodeada).
+- Capaz de realizar Page-Object-Model básico.
+- Capaz de realizar controles de versionado de código (conocimiento básico en GIT).
+
+### 🧪L4
+
+Capaz de realizar tareas (TD) para Automatizar pruebas complejas y de integración de historias implementadas.
+
+##### Prácticas:
+
+- Capacidad de resolución de problemas y conflictos de pruebas (Debugging).
+- Capaz de realizar pruebas E2E con data en iteración (Parametrizadas).
+- Capaz de escribir código con Excelentes prácticas y principios (POM, “DRY”, etc.).
+- Capaz de escribir scripts de prueba con Estructura de Datos, condicionales, bucles, etc.
+- Capaz de entender y ejecutar Pipelines de Regresión en Continuous Integration (CI).
+- Capaz de escribir scripts de prueba para intercepción y assertions de API Testing.
+
+### 🧪L5
+
+Capaz de realizar cualquier tarea (TD) de Automatización y gestionar los Planes de Prueba.
+
+##### Prácticas:
+
+- Capacidad de resolución de conflictos de GIT con facilidad.
+- Capacidad de resolución de problemas de ambientes y errores de config del Repo.
+- Capaz de realizar Planes de Prueba generales y para Automatización de pruebas.
+- Capaz de planificar, armar y hacer funcionar los Repositorios de Automatización de Prueba.
+- Capaz de configurar integraciones de aplicaciones de Reporte de Prueba con el Repo.
+- Capaz de realizar pruebas automatizadas de Performance (con ciertas herramientas).
+
+---
+
+### 🧙🏻‍♂️APRENDE Y GANA EXPERIENCIA COMO QA AUTOMATION EN UPEX GALAXY🚀
+
+Suscríbete a un Sprint y trabaja como un QA Automation Engineer!
+
+### 🚩ENTRA EN [UPEXDOCU](https://linktree.com/upexjira) Y BUSCA LAS GUÍAS DE SELENIUM-PYTHON AL GRANO!
+
+---
+
+## CURSO YOUTUBE DE SELENIUM-PYTHON AL GRANO:
+
+- [🛸CURSO: "AUTOMATION SELENIUM-PYTHON AL GRANO" (UPEX GALAXY)]()
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

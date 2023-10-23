@@ -4,13 +4,12 @@ from tests.testbase import *
 
 class TestSuiteLogin:
 
-    # *TC1
+    # *ExampleTest: uses a fixture "Login" as precondition, then validate that inventory list page has 6 items
     def test_login_success(self, loginSuccessful: tuple[WebDriver, Locators]):
         web, get = loginSuccessful
 
         items = get.byClasses('inventory_item')
         expect(len(items)).toBeEqual(6)
-        wait(2)
 
 
 if __name__ == "__main__":

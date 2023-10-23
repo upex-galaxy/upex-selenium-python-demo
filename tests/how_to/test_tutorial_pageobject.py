@@ -9,10 +9,10 @@ from tests.how_to.pages.examplePageObjectModel import ExampleLoginPage
 class TestLoginSauce:
 
     @pytest.fixture
-    def precondition(self):
+    def precondition(self, setWebDriver: WebDriver):
         # Se listan las variables globales del Suite de Prueba.
         global web, get, loginPage
-        web = Drivers().chromeDriver()
+        web = setWebDriver
         get = Locators(web)
         loginPage = ExampleLoginPage(web, get)
         get.page('https://www.saucedemo.com/')

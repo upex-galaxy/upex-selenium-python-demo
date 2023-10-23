@@ -10,12 +10,12 @@ from selenium.webdriver.common.by import By
 class TestFixture:
     # * Definición de la fixture de configuración del navegador
     @pytest.fixture
-    def beforeEach(self):
+    def beforeEach(self, setWebDriver: WebDriver):
         # * SI vamos a usar el Fixture dentro del mismo Suite (class) se debe crear una nueva instancia del navegador Driver para no tener inconvenientes en los métodos.
         # Se listan las variables globales del Suite de Prueba.
         global web, get
         # Se retorna una nueva instancia a una variable local.
-        web = Drivers().chromeDriver()
+        web = setWebDriver
         # Se crea una instancia de Class con todos sus métodos.
         get = Locators(web)
 

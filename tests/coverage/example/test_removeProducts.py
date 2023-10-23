@@ -5,7 +5,7 @@ from tests.testbase import *
 
 class TestRemoveProducts:
 
-    # * TC1:
+    # * TC1: (No POM) Validate adding and removing one Product, the shoppingCart should be empty
     def test_removeProduct(self, loginSuccessful: Test):
         web, get = loginSuccessful
 

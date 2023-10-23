@@ -16,6 +16,11 @@ def pytest_addoption(parser: pytest.Parser):
         help="Browser to use: chrome, edge, firefox",
         choices=("chrome", "edge", "firefox"),
     )
+    parser.addoption(
+        "--headless", action="store", default="false",
+        help="Test execution in headless: true or false",
+        choices=("true", "false"),
+    )
 
 
 @pytest.fixture
@@ -23,16 +28,21 @@ def browser(request: pytest.FixtureRequest):
     return request.config.getoption("--browser")
 
 
-BROWSER_FUNCTIONS = {
-    "chrome": Drivers().chromeDriver,
-    "edge": Drivers().edgeDriver,
-    "firefox": Drivers().firefoxDriver
-}
+@pytest.fixture
+def headless(request: pytest.FixtureRequest):
+    return request.config.getoption("--headless")
 
 
 @pytest.fixture
-def setWebDriver(browser: str):
+def setWebDriver(headless: str, browser: str):
+    # * Convertir el valor de headless a boolean:
+    run = True if headless == "true" else False
     # * Crear la instancia del Driver (dado el driver elegido por CLI):
+    BROWSER_FUNCTIONS = {
+        "chrome": Drivers(run).chromeDriver,
+        "edge": Drivers(run).edgeDriver,
+        "firefox": Drivers(run).firefoxDriver
+    }
     driver = BROWSER_FUNCTIONS.get(browser)
     if not driver:
         raise ValueError(f'Browser "{browser}" not supported.')
@@ -100,7 +110,7 @@ def validUser():
 @pytest.fixture
 def loginSuccessful(beforeEach: Test, validUser: dict[str, str]):
     web, get = beforeEach
-    loginPage = LoginPageEly(web, get)
+    loginPage = exLoginPage(web, get)
     loginPage.enterUsername(validUser["username"])
     loginPage.enterPassword(validUser["password"])
     loginPage.submitLogin()
