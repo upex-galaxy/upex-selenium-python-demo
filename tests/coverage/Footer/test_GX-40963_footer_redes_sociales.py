@@ -1,4 +1,5 @@
 import pytest
+import requests
 from tests.testbase import *
 from tests.pages.exampleLoginPage import LoginPage
 from tests.pages.GX_40963_FooterPage import FooterPage
@@ -30,7 +31,10 @@ def beforeEach():
 
 
 def test_TC1_acceder_red_social_twitter(beforeEach):
+    hrefValue = footerPage.getHrefAttrib(targetLink='twitter')
+    response = requests.get(f'{hrefValue}')
     footerPage.clickLink(targetLink='twitter')
     footerPage.switchNewTab(defaultTab=defaultTab)
     newCurrentTab = web.current_url
+    expect(response.status_code).toBeEqual(200)
     assert 'twitter' in newCurrentTab

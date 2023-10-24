@@ -17,3 +17,7 @@ class FooterPage:
             if windowHand != defaultTab:
                 self.web.switch_to.window(windowHand)
                 break
+
+    def getHrefAttrib(self, targetLink):
+        hrefAttrib = self.allLinksOnFooter(targetLink).get_attribute('href')
+        return hrefAttrib
