@@ -10,3 +10,10 @@ class FooterPage:
 
     def clickLink(self, targetLink):
         self.allLinksOnFooter(targetLink).click()
+
+    def switchNewTab(self, defaultTab):
+        AllTabs = self.web.window_handles
+        for windowHand in AllTabs:
+            if windowHand != defaultTab:
+                self.web.switch_to.window(windowHand)
+                break

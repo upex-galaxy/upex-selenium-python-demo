@@ -23,9 +23,14 @@ def loginPrecondition():
 
 @pytest.fixture
 def beforeEach():
+    global defaultTab
     initialSetup()
     loginPrecondition()
+    defaultTab = web.current_window_handle
 
 
-def test_TC01(beforeEach):
+def test_TC1_acceder_red_social_twitter(beforeEach):
     footerPage.clickLink(targetLink='twitter')
+    footerPage.switchNewTab(defaultTab=defaultTab)
+    newCurrentTab = web.current_url
+    assert 'twitter' in newCurrentTab
