@@ -1,13 +1,15 @@
 import pytest
 from tests.testbase import *
 from tests.pages.exampleLoginPage import LoginPage
+from tests.pages.GX_40963_FooterPage import FooterPage
 
 
 def initialSetup():
-    global get, web, loginPage, swgPLPPage
+    global get, web, loginPage, swgPLPPage, footerPage
     web = Drivers().chromeDriver()
     get = Locators(web)
     loginPage = LoginPage(web, get)
+    footerPage = FooterPage(web, get)
 
 
 def loginPrecondition():
@@ -26,4 +28,4 @@ def beforeEach():
 
 
 def test_TC01(beforeEach):
-    pass
+    footerPage.clickLink(targetLink='twitter')
