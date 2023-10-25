@@ -101,14 +101,10 @@ Según la Encuesta de desarrolladores de Stack Overflow 2021, Python es el terce
 1. Perfecta Nomenclatura del nombre de Archivo de prueba: <br> `test_{GXID}_{StoryShortName}.py ej: test_GX50_AgregarItemsAlCart.py`
 2. El Archivo de Prueba dentro estar en el directorio "coverage" con la carpeta del Componente correspondiente, ejemplo: <br> `tests/coverage/example/test_example.py`.
 3. Buen diseño del Test Suite elaborado (Esto implica que se vean bien el código en general, que al menos funcione).
-4. NO usar fixture como PageObjectModel sino como Data (es decir, no agarrar elementos Web por fixtures, sino usar el Fixture para iterar Data o reutilizar variables).
-   - Previamente en GX, se usaba el patrón Fixture como POM, porque era fácil de aprender, pero hoy en día las entrevistas técnicas piden PageObject Model de la manera tradicional, sin usar Commands.
-5. Los "Cypress Commands" no es un uso obligatorio; pero si se quiere usar, debería aplicarse para hacer funciones de algoritmos para múltiples suites o para generar precondiciones repetitivas (Background).
-
-6. **En caso de usar el Utils u otros módulos**: Ya los tienes todo disponible en el archivo principal Testbase que puedes importar desde tu archivo, usando: <br> `from tests.testbase import *`.
-7. **En caso de usar PageObjectModel**: Aplicar las buenas prácticas del patrón de diseño POM. Recuerda usar el tipo de función lambda para generar los locators y crear buenos nombres de los métodos.
-8. **En caso de usar el CI Pipeline**: Usar únicamente el archivo predeterminado del proyecto `sanity.yml`, y asegurarse de modificarlo correctamente (Solo cambiar el Path del Test Suite) y no borrar o cambiar nada más, que funcione y pase los Checks. El archivo `regression.yml` se ejecutará automaticamente cuando los cambios hayan mergeado a QA.
-9. **En caso de usar Behave (BDD)**: Chequear que el archivo Gherkin (.feature) y los StepDefinitions (.py) estén correctamente diseñados. Lee las guías o el curso para más información de su uso.
+4. **En caso de usar el Utils u otros módulos**: Ya los tienes todo disponible en el archivo principal Testbase que puedes importar desde tu archivo, usando: <br> `from tests.testbase import *`.
+5. **En caso de usar PageObjectModel**: Aplicar las buenas prácticas del patrón de diseño POM. Recuerda usar el tipo de función lambda para generar los locators y crear buenos nombres de los métodos.
+6. **En caso de usar el CI Pipeline**: Usar únicamente el archivo predeterminado del proyecto `sanity.yml`, y asegurarse de modificarlo correctamente (Solo cambiar el Path del Test Suite) y no borrar o cambiar nada más, que funcione y pase los Checks. El archivo `regression.yml` se ejecutará automaticamente cuando los cambios hayan mergeado a QA.
+7. **En caso de usar Behave (BDD)**: Chequear que el archivo Gherkin (.feature) y los StepDefinitions (.py) estén correctamente diseñados. Lee las guías o el curso para más información de su uso.
 
 ---
 
