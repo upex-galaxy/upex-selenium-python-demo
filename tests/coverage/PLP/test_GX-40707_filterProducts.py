@@ -4,9 +4,9 @@ from tests.pages.GX_40707_PLPPage import SwagLabPLP
 from tests.pages.GX_40707_LoginPage import LoginPage
 
 
-def initialSetup():
+def initialSetup(setWeb: WebDriver):
     global get, web, loginPage, swgPLPPage
-    web = Drivers().chromeDriver()
+    web = setWeb
     get = Locators(web)
     loginPage = LoginPage(web, get)
     swgPLPPage = SwagLabPLP(web, get)
@@ -21,8 +21,9 @@ def loginPrecondition():
 
 
 @pytest.fixture
-def beforeEach():
-    initialSetup()
+# This "web" specific parameter is to Execute the same fixture in tests/conftest.py
+def beforeEach(web: WebDriver):
+    initialSetup(web)
     loginPrecondition()
 
 

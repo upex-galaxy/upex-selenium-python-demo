@@ -5,9 +5,9 @@ from tests.pages.exampleLoginPage import LoginPage
 from tests.pages.GX_40963_FooterPage import FooterPage
 
 
-def initialSetup():
+def initialSetup(setWeb: WebDriver):
     global get, web, loginPage, swgPLPPage, footerPage
-    web = Drivers().chromeDriver()
+    web = setWeb
     get = Locators(web)
     loginPage = LoginPage(web, get)
     footerPage = FooterPage(web, get)
@@ -23,9 +23,9 @@ def loginPrecondition():
 
 
 @pytest.fixture
-def beforeEach():
+def beforeEach(web: WebDriver):
     global defaultTab, headers
-    initialSetup()
+    initialSetup(web)
     loginPrecondition()
     defaultTab = web.current_window_handle
     headers = {
