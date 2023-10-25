@@ -26,4 +26,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: 🧪Selenium Run Pytest
-        run: pytest --headless=true tests/coverage/example/test_example.py
+        run: pytest --headless=true tests/coverage/Footer/test_GX-40963_footer_redes_sociales.py
